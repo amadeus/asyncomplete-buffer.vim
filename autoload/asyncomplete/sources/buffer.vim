@@ -53,7 +53,7 @@ function! s:on_event(opt, ctx, event) abort
     if a:event == 'TextChangedI'
         call s:refresh_keyword_incr(a:ctx['typed'])
     else
-        if s:last_ctx == a:ctx
+        if has_key(s:last_ctx, 'changedtick') && s:last_ctx['changedtick'] == a:ctx['changedtick']
             return
         endif
         let s:last_ctx = a:ctx
